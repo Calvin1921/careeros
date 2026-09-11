@@ -1,0 +1,88 @@
+{
+  "name": "CareerOS Portfolio Demo \u2014 Fictional Profile",
+  "tags": ["portfolio-demo", "fictional-only"],
+  "conversation_config": {
+    "agent": {
+      "language": "en",
+      "first_message": "Hi, I'm CareerOS. Let's build your profile through a quick conversation. What kind of engineering work have you been doing?",
+      "prompt": {
+        "prompt": "You are CareerOS, a warm and concise career conversation assistant. This is a fictional portfolio demonstration with a synthetic candidate. You have no prior CV or personal data. Do not assume their skills or goals. Ask one short question at a time and acknowledge answers naturally in one sentence. After the first answer about experience, ask what kind of role they want next and why. After that answer, ask where and how they prefer to work. After the third substantive answer, call propose_profile_facts with a small set of 4 to 6 useful facts extracted only from the candidate's actual statements. Allowed fields: targetRole, experience, skills, location, workStyle, motivation. Each fact must include a concise value and an exact literal quote of the candidate's words as evidence. Never use your own words as evidence. If a tool rejects evidence, correct the quote using the transcript and retry once. Say you have drafted the details for review only if the tool confirms pending_confirmation. Tell the candidate to end the call, review and edit the proposed details, and choose Save confirmed facts. Never say their profile is already saved. Do not ask for salary, contact information, employer names, or private company details. Do not invent experience or quantify impact they have not described. Keep all spoken replies under 35 words. Do not call external tools, open URLs or submit applications. Stop asking questions after you draft the review.",
+        "llm": "gemini-2.5-flash",
+        "temperature": 0.2,
+        "tools": [
+          {
+            "type": "client",
+            "name": "propose_profile_facts",
+            "description": "Propose facts from the user transcript for local human review. Does not save the profile. Exact user evidence is required. Call after gathering background, goals, and work preferences.",
+            "expects_response": true,
+            "response_timeout_secs": 15,
+            "parameters": {
+              "type": "object",
+              "required": ["facts"],
+              "properties": {
+                "facts": {
+                  "type": "array",
+                  "description": "Four to six facts explicitly stated by the candidate",
+                  "items": {
+                    "type": "object",
+                    "required": ["field", "value", "evidence"],
+                    "properties": {
+                      "field": {
+                        "type": "string",
+                        "description": "One of targetRole, experience, skills, location, workStyle, motivation"
+                      },
+                      "value": {
+                        "type": "string",
+                        "description": "Concise proposed profile value"
+                      },
+                      "evidence": {
+                        "type": "string",
+                        "description": "Exact verbatim contiguous quote from one candidate utterance supporting the value"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "knowledge_base": []
+      }
+    },
+    "tts": {
+      "voice_id": "YOUR_ELEVENLABS_VOICE_ID",
+      "model_id": "eleven_flash_v2",
+      "speed": 1.05
+    },
+    "turn": {
+      "turn_timeout": 20,
+      "silence_end_call_timeout": 45
+    },
+    "conversation": {
+      "max_duration_seconds": 180,
+      "client_events": [
+        "audio",
+        "interruption",
+        "user_transcript",
+        "agent_response",
+        "client_tool_call"
+      ]
+    }
+  },
+  "platform_settings": {
+    "auth": {
+      "enable_auth": true
+    },
+    "privacy": {
+      "record_voice": true,
+      "retention_days": 7,
+      "delete_transcript_and_pii": true,
+      "delete_audio": true
+    },
+    "call_limits": {
+      "agent_concurrency_limit": 1,
+      "daily_limit": 12,
+      "bursting_enabled": false
+    }
+  }
+}

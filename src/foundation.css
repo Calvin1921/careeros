@@ -1,0 +1,188 @@
+/* CareerOS design foundation: shared navigation, surfaces, and stable job flow. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.app-header nav button {
+  align-self: center;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 7px;
+}
+.app-header nav button[aria-current] {
+  color: #b93d0c;
+  background: #fff0e8;
+  font-weight: 600;
+}
+.app-header nav button[aria-current]:after {
+  display: none;
+}
+.workspace {
+  grid-template-columns: minmax(0, 700px) minmax(300px, 356px);
+  gap: 64px;
+  max-width: 1120px;
+  margin: 40px auto 60px;
+  padding: 0 32px;
+}
+.role-navigation + .workspace {
+  margin-top: 40px;
+}
+.application-form {
+  max-width: 1120px;
+  margin: 0 auto 100px;
+  padding: 40px 32px 0;
+}
+.application-form__content {
+  max-width: 760px;
+}
+.application-form h1 {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.7px;
+  margin: 8px 0 10px;
+}
+.application-form h2 {
+  font-size: 18px;
+}
+.application-form textarea {
+  min-height: 180px;
+}
+.application-form__section {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  margin-top: 32px;
+}
+.application-form .handoff-note {
+  padding: 26px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+}
+.application-form .handoff-note p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.application-form.success {
+  text-align: left;
+}
+.application-form.success .secondary {
+  margin-top: 24px;
+}
+.live-discovery__tabs {
+  gap: 6px;
+  padding: 3px;
+  background: #f6f3f0;
+  border-radius: 7px;
+}
+.live-discovery__tabs button {
+  padding: 7px 10px;
+  letter-spacing: 0.02em;
+  border-radius: 5px;
+}
+.live-discovery__tabs button[aria-pressed="true"] {
+  color: #a43b11;
+  background: #fff;
+  box-shadow: 0 1px 3px #39200e12;
+}
+.live-discovery__tabs button[aria-pressed="true"]:after {
+  display: none;
+}
+.live-discovery__search {
+  position: relative;
+  margin: 26px 0 0;
+}
+.live-discovery__search > svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #887f78;
+}
+.live-discovery__search input {
+  min-height: 44px;
+  margin: 0;
+  padding-left: 42px;
+  font-size: 14px;
+}
+.data-mode {
+  width: max-content;
+  max-width: calc(100% - 40px);
+  margin: 24px auto 0;
+  gap: 4px;
+  padding: 4px;
+  background: #f6f3f0;
+  border-radius: 7px;
+}
+.data-mode button {
+  padding: 7px 10px;
+  border-radius: 5px;
+}
+.data-mode button[aria-pressed="true"] {
+  color: #a43b11;
+  background: #fff;
+  box-shadow: 0 1px 3px #39200e12;
+}
+.job-list,
+.live-discovery__list {
+  border: 1px solid var(--border) !important;
+  border-radius: 9px;
+  overflow: hidden;
+}
+.shortlist-head,
+.live-discovery__list-head {
+  padding-top: 28px;
+}
+@media (max-width: 1150px) {
+  .workspace {
+    margin: 40px auto;
+    padding: 0 25px;
+  }
+}
+@media (max-width: 760px) {
+  .app-header {
+    gap: 12px;
+  }
+  .app-header nav {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 2px;
+  }
+  .app-header nav button {
+    height: 36px;
+    padding: 0 7px;
+    white-space: nowrap;
+  }
+  .workspace {
+    margin: 28px auto 35px;
+    padding: 0 20px;
+  }
+  .application-form {
+    padding: 30px 20px 0;
+  }
+  .job-list,
+  .live-discovery__list {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0;
+  }
+  .criteria-strip {
+    display: grid;
+    overflow: visible;
+  }
+  .criteria-strip span {
+    white-space: normal;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .criteria-strip span:last-child {
+    border-bottom: 0;
+  }
+}

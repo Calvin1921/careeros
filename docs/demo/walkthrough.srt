@@ -1,0 +1,194 @@
+1
+00:00:00,022 --> 00:00:04,851
+Start with a conversation. CareerOS asks
+about your background, goals and
+
+2
+00:00:04,851 --> 00:00:10,119
+working preferences, then proposes a
+profile for you to review. This candidate
+
+3
+00:00:10,119 --> 00:00:10,997
+is fictional.
+
+4
+00:00:14,331 --> 00:00:21,351
+Hi, I'm CareerOS. Let's build your profile
+through a quick conversation. What
+
+5
+00:00:21,351 --> 00:00:26,031
+kind of engineering work have you been
+doing?
+
+6
+00:00:26,331 --> 00:00:30,740
+I've spent eight years building full-stack
+products, mainly with TypeScript,
+
+7
+00:00:30,740 --> 00:00:36,031
+React, and Python. Most recently, I built
+payment tools for small businesses.
+
+8
+00:00:36,331 --> 00:00:41,898
+That's great; eight years building full-
+stack products with TypeScript, React,
+
+9
+00:00:41,898 --> 00:00:48,578
+and and Python, including payment tools,
+is solid experience. What kind of
+
+10
+00:00:48,578 --> 00:00:53,031
+role are you looking for next, and why?
+
+11
+00:00:53,331 --> 00:00:58,707
+I'm looking for a senior AI engineer role
+where I can talk to users and own a
+
+12
+00:00:58,707 --> 00:01:02,817
+feature from idea to production. I care
+more about solving a useful problem
+
+13
+00:01:02,817 --> 00:01:05,031
+than adding AI for its own sake.
+
+14
+00:01:05,331 --> 00:01:11,960
+That's a clear goal: a senior AI engineer
+role where you can own features from
+
+15
+00:01:11,960 --> 00:01:17,705
+idea to production, focused on solving
+useful problems. Where and how do you
+
+16
+00:01:17,705 --> 00:01:19,031
+prefer to work?
+
+17
+00:01:19,331 --> 00:01:26,181
+I'm based in Hong Kong. I prefer a hybrid
+team, but I'm open to remote work
+
+18
+00:01:26,181 --> 00:01:33,031
+with a few hours of time zone overlap. I
+still want to write code every day.
+
+19
+00:01:33,331 --> 00:01:37,829
+Thanks for sharing. You're based in Hong
+Kong, prefer hybrid teams, and want
+
+20
+00:01:37,829 --> 00:01:43,019
+to write code daily with some time zone
+overlap. Let me draft a summary of
+
+21
+00:01:43,019 --> 00:01:47,517
+your profile for review. I've drafted some
+details for your review. Please end
+
+22
+00:01:47,517 --> 00:01:51,669
+the call to review and edit them, then
+choose "Save confirmed facts."
+
+23
+00:01:52,369 --> 00:01:56,918
+The conversation becomes a set of proposed
+details, each linked to the
+
+24
+00:01:56,918 --> 00:02:01,467
+candidate’s own words. Nothing is
+confirmed yet. Review the wording, make a
+
+25
+00:02:01,467 --> 00:02:06,016
+correction if needed, and choose which
+details to keep. Only the selected
+
+26
+00:02:06,016 --> 00:02:08,669
+details are saved to the local profile.
+
+27
+00:02:11,355 --> 00:02:16,722
+The confirmed profile is now available
+here. The opportunity workflow uses a
+
+28
+00:02:16,722 --> 00:02:19,405
+separate fictional dataset in this
+prototype.
+
+29
+00:02:22,355 --> 00:02:28,605
+A job search can quickly turn into a collection of tabs, notes, and unfinished applications.
+
+30
+00:02:28,905 --> 00:02:37,855
+CareerOS brings that work into one place. The briefing starts with the opportunities that need attention, and the decisions to make next.
+
+31
+00:02:38,155 --> 00:02:42,180
+This walkthrough uses fictional candidate and company data.
+
+32
+00:02:44,480 --> 00:02:48,780
+The opportunities view keeps the wider pipeline close at hand.
+
+33
+00:02:49,080 --> 00:02:55,255
+Filter the list, compare roles, and see the current application status without opening each one.
+
+34
+00:02:55,555 --> 00:03:00,705
+You can focus on what is ready to progress while keeping the rest of the search in view.
+
+35
+00:03:03,005 --> 00:03:07,105
+Open a role to see the detail behind the recommendation.
+
+36
+00:03:07,405 --> 00:03:15,105
+The review brings together the role requirements, the candidate’s relevant experience, and the questions that still need checking.
+
+37
+00:03:15,405 --> 00:03:20,780
+That makes the next step a considered decision, with the supporting information beside it.
+
+38
+00:03:23,080 --> 00:03:26,805
+From that same role, move into the application package.
+
+39
+00:03:27,105 --> 00:03:34,505
+Review the prepared CV and the required materials, then check the wording before taking it outside the workspace.
+
+40
+00:03:34,805 --> 00:03:40,280
+The draft stays editable, and the candidate stays responsible for confirming the facts.
+
+41
+00:03:42,580 --> 00:03:47,005
+When an application moves forward, update its status in the workspace.
+
+42
+00:03:47,305 --> 00:03:52,730
+The opportunity stays connected to its preparation, and the list reflects the change.
+
+43
+00:03:53,030 --> 00:04:00,830
+CareerOS keeps the path from opportunity to application understandable, so the next decision is easier to make.

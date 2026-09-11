@@ -1,0 +1,82 @@
+.job-workspace-header {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 32px 0;
+}
+.job-workspace-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  color: var(--accent);
+  font-size: 13px;
+}
+.job-workspace-identity {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 26px 0 30px;
+  border-bottom: 1px solid var(--border);
+}
+.job-workspace-company {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6a625c;
+}
+.job-workspace-identity h1 {
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  font-weight: 600;
+  margin: 6px 0 12px;
+}
+.job-workspace-facts {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 14px;
+}
+.job-workspace-state {
+  display: grid;
+  justify-items: end;
+  gap: 7px;
+  flex: none;
+  padding-top: 4px;
+}
+.job-workspace-state span {
+  border-radius: 999px;
+  background: #fff0e8;
+  color: #c6430e;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.job-workspace-state small {
+  color: var(--muted);
+  font-size: 11px;
+}
+@media (max-width: 760px) {
+  .job-workspace-header {
+    padding: 18px 20px 0;
+  }
+  .job-workspace-identity {
+    display: block;
+    padding: 18px 0 22px;
+  }
+  .job-workspace-identity h1 {
+    font-size: 26px;
+  }
+  .job-workspace-state {
+    justify-items: start;
+    margin-top: 18px;
+  }
+  .job-workspace-facts {
+    align-items: flex-start;
+  }
+  .job-workspace-facts svg {
+    margin-top: 2px;
+  }
+}

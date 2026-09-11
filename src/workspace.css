@@ -1,0 +1,372 @@
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f7ece2;
+  font-size: 10px;
+  font-weight: 600;
+}
+.job-context {
+  max-width: 1340px;
+  margin: 24px auto 0;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.job-context .text-button {
+  font-size: 12px;
+}
+.job-context .selected-role strong {
+  font-size: 17px;
+}
+.demo-label {
+  font-size: 11px;
+  color: #786c63;
+  margin-left: auto;
+}
+.role-navigation {
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid var(--border);
+  margin: 25px auto 30px;
+}
+.role-navigation button {
+  padding: 14px 0;
+  font-size: 13px;
+  border-bottom: 2px solid transparent;
+  color: #776c64;
+}
+.role-navigation button[aria-current] {
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.role-navigation > span {
+  margin-left: auto;
+  font-size: 12px;
+  color: #776c64;
+}
+.home-workspace {
+  max-width: 1150px;
+  margin: 64px auto;
+  padding: 0 30px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  font-size: 11px;
+  color: #a94c27;
+}
+.home-workspace h1 {
+  font-size: 42px;
+  font-weight: 550;
+  letter-spacing: -1.5px;
+  margin: 16px 0;
+}
+.next-move {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  background: #fcf4ed;
+  border-radius: 10px;
+  margin: 38px 0 55px;
+  gap: 30px;
+}
+.next-move h2 {
+  font-size: 22px;
+  font-weight: 500;
+}
+.next-move p {
+  font-size: 14px;
+  color: #766a60;
+  max-width: 530px;
+  margin-top: 10px;
+}
+.next-move button {
+  white-space: nowrap;
+}
+.list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.list-heading h2 {
+  font-size: 21px;
+  font-weight: 500;
+}
+.list-heading > span {
+  font-size: 12px;
+  color: #776c64;
+}
+.application-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 24px;
+  padding: 25px 0;
+  border-top: 1px solid var(--border);
+  text-align: left;
+}
+.application-row strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 550;
+}
+.application-row div > span {
+  display: block;
+  font-size: 13px;
+  color: #81756b;
+  margin-top: 7px;
+}
+.stage-label {
+  margin-left: auto;
+  font-size: 12px;
+  border: 1px solid #e3d8ce;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+.quiet-empty {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.quiet-empty svg {
+  color: #aa785d;
+  margin-bottom: 20px;
+}
+.quiet-empty h3 {
+  font-size: 18px;
+  font-weight: 500;
+}
+.quiet-empty p {
+  font-size: 14px;
+  color: #776c64;
+  margin: 12px 0 20px;
+}
+.brief-evidence,
+.handoff-note {
+  padding: 20px;
+  background: #fcf4ed;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.brief-evidence p,
+.handoff-note p {
+  color: #776c64;
+  margin-top: 9px;
+}
+.brief-evidence span {
+  font-size: 11px;
+  color: #897d73;
+  display: block;
+  margin-top: 10px;
+}
+select {
+  font: inherit;
+  display: block;
+  width: 100%;
+  border: 1px solid #ded7d1;
+  border-radius: 6px;
+  background: white;
+  padding: 13px;
+  margin-top: 10px;
+  color: #3f3935;
+}
+.material-list {
+  font-size: 14px;
+  line-height: 2;
+  padding-left: 20px;
+}
+.role-navigation + .workspace {
+  margin-top: 0;
+}
+.application-form {
+  margin-top: 35px;
+}
+button,
+a,
+select {
+  touch-action: manipulation;
+}
+@media (max-width: 1350px) {
+  .role-navigation {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+@media (max-width: 760px) {
+  .job-context {
+    padding: 0 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .job-context > .text-button {
+    width: 100%;
+  }
+  .job-context .selected-role {
+    flex: 1;
+    min-width: 0;
+  }
+  .job-context .selected-role strong {
+    font-size: 15px;
+  }
+  .job-context .selected-role p {
+    font-size: 12px;
+  }
+  .job-context .role-icon {
+    display: none;
+  }
+  .demo-label {
+    font-size: 10px;
+  }
+  .role-navigation {
+    margin: 15px 20px 25px;
+    gap: 22px;
+  }
+  .role-navigation button {
+    font-size: 12px;
+  }
+  .role-navigation > span {
+    display: none;
+  }
+  .home-workspace {
+    margin: 36px auto;
+    padding: 0 20px;
+  }
+  .home-workspace h1 {
+    font-size: 32px;
+  }
+  .next-move {
+    display: block;
+    padding: 24px;
+  }
+  .next-move button {
+    margin-top: 20px;
+  }
+  .list-heading {
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .list-heading > span {
+    font-size: 10px;
+  }
+  .application-row {
+    gap: 12px;
+  }
+  .stage-label {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+  .application-row strong {
+    font-size: 14px;
+  }
+}
+.requirements {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.requirements h2 {
+  font-size: 17px;
+  font-weight: 550;
+}
+.requirements > ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+.requirements li label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 12px 0;
+  line-height: 1.5;
+}
+.requirements input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  margin: 2px 0 0;
+}
+.requirements-gaps {
+  font-size: 12px;
+  background: #fcf4ed;
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+.requirements-gaps ul {
+  padding-left: 18px;
+  margin-bottom: 0;
+  line-height: 1.7;
+}
+.requirement-importance {
+  font-size: 11px;
+  color: #776c64;
+}
+.salary-note {
+  font-size: 11px;
+  color: #93612f;
+  margin-top: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+.filename strong {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 13px;
+}
+.application-kit h1 {
+  font-size: 32px;
+}
+.role-review__tabs button {
+  min-height: 44px;
+}
+.scan-row button,
+.card-foot button {
+  min-height: 36px;
+}
+@media (max-width: 800px) {
+  .role-review__aside {
+    order: 0;
+  }
+  .role-review__content .role-review__main {
+    order: -1;
+  }
+}
+.application-employer-link {
+  width: max-content;
+  margin-top: 18px;
+  text-decoration: none;
+}
+.application-form__content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.application-form__section {
+  margin-top: 30px;
+}
+.application-form__section h2,
+.handoff-note h2 {
+  font-size: 18px;
+}
+.application-question-source {
+  display: block;
+  margin-top: 5px;
+  color: #8c8179;
+  font-size: 11px;
+  font-weight: 400;
+}
