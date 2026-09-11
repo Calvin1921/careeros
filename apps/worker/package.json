@@ -13,5 +13,6 @@
     "@careeros/domain": "*",
     "@careeros/data": "*",
     "@careeros/agents": "*"
-  }
+  },
+  "license": "PolyForm-Noncommercial-1.0.0"
 }

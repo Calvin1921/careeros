@@ -14,7 +14,7 @@ To reset the demo, stop any active call and clear this site's browser storage th
 
 The token server binds to the local machine. It is not an authenticated public API. Do not publish a configured development server. Use fictional information when reviewing this prototype.
 
-Repository source is provided for review; no open-source license is granted. Third-party packages retain their respective licenses, available in their installed distributions. Generic commit metadata is used to keep personal email addresses out of this review repository.
+CareerOS source is provided under the [PolyForm Noncommercial License 1.0.0](../LICENSE.md). It is source-available, not open source. Third-party packages retain their respective licenses, available in their installed distributions. Generic commit metadata is used to keep personal email addresses out of this review repository.
 
 ## Monorepo persistence
 

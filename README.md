@@ -104,3 +104,9 @@ Create a private ElevenLabs agent from `voice-agent-config.json`, replace its st
 ## Demo
 
 The embedded recording shows the approved conversation UI using a fictional candidate. It predates the monorepo integration: confirmed facts now persist in PostgreSQL rather than only on the recording device, and discovery uses the real API. The opportunity and CV scenes remain fictional demonstrations. See [demo notes](docs/DEMO.md).
+
+## License
+
+CareerOS is source-available under the [PolyForm Noncommercial License 1.0.0](LICENSE.md), not an open-source license. The license permits use, modification and redistribution for its permitted purposes, including personal noncommercial experimentation. Commercial use outside those permissions requires a separate license from the copyright holder.
+
+The copyright holder retains ownership and may commercialize CareerOS or offer separate commercial licenses. Third-party components remain subject to their own licenses. For commercial licensing inquiries, contact the repository owner through their [GitHub profile](https://github.com/Calvin1921). The license text governs; this paragraph is a summary.
