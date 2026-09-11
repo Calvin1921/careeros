@@ -2,9 +2,11 @@
 
 A career conversation becomes a profile the candidate can inspect and control. CareerOS asks about experience, goals and working preferences, proposes details with supporting quotes, and saves only what the candidate confirms.
 
-[Watch the product walkthrough (4:03)](docs/demo/walkthrough.mp4) · [Architecture and review guide](docs/ARCHITECTURE.md) · [Demo notes](docs/DEMO.md)
+### Product walkthrough · 4:03
 
-![CareerOS conversation](docs/demo/poster.png)
+https://github.com/user-attachments/assets/f825aedc-6b07-4698-95aa-3e5136396f75
+
+[Download the video](docs/demo/walkthrough.mp4) · [Architecture and review guide](docs/ARCHITECTURE.md) · [Demo notes](docs/DEMO.md)
 
 ## Problem
 
