@@ -1,0 +1,94 @@
+name: careeros-review
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: careeros
+      POSTGRES_PASSWORD: careeros_local
+      POSTGRES_DB: careeros
+    ports: ["127.0.0.1:${POSTGRES_PORT:-54329}:5432"]
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U careeros -d careeros"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    command:
+      [
+        "redis-server",
+        "--appendonly",
+        "yes",
+        "--maxmemory-policy",
+        "noeviction",
+      ]
+    ports: ["127.0.0.1:${REDIS_PUBLIC_PORT:-6389}:6379"]
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  migrate:
+    build: .
+    profiles: ["full"]
+    environment: &backend
+      DATABASE_URL: postgres://careeros:careeros_local@postgres:5432/careeros
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      API_HOST: 0.0.0.0
+      API_PORT: 4000
+      WEB_ORIGIN: http://localhost:${WEB_PORT:-3002}
+    command: ["node", "packages/data/dist/migrate.js"]
+    depends_on:
+      postgres: { condition: service_healthy }
+  api:
+    build: .
+    profiles: ["full"]
+    environment: *backend
+    ports: ["127.0.0.1:${API_PUBLIC_PORT:-4000}:4000"]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:4000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  worker:
+    build: .
+    profiles: ["full"]
+    environment: *backend
+    command: ["npm", "run", "start", "-w", "@careeros/worker"]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      redis: { condition: service_healthy }
+  discovery-worker:
+    build: .
+    profiles: ["full"]
+    environment: *backend
+    command: ["node", "apps/api/dist/discovery-worker.js"]
+    stop_grace_period: 60s
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+  web:
+    build: .
+    profiles: ["full"]
+    environment:
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY:-}
+      ELEVENLABS_DEMO_AGENT_ID: ${ELEVENLABS_DEMO_AGENT_ID:-}
+      API_INTERNAL_URL: http://api:4000
+      WEB_ORIGIN: http://localhost:${WEB_PORT:-3002}
+    command: ["npm", "run", "start", "-w", "@careeros/web"]
+    ports: ["127.0.0.1:${WEB_PORT:-3002}:3000"]
+    depends_on:
+      api: { condition: service_healthy }
+volumes:
+  postgres-data:
+  redis-data:

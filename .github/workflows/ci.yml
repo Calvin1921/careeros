@@ -16,6 +16,8 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: npm run build:packages
       - run: npm test
       - run: npm run build
       - run: npm audit --audit-level=high
+      - run: docker compose --profile full config --quiet

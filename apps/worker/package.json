@@ -1,0 +1,17 @@
+{
+  "name": "@careeros/worker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch --env-file=../../.env src/main.ts",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.58.5",
+    "@careeros/domain": "*",
+    "@careeros/data": "*",
+    "@careeros/agents": "*"
+  }
+}

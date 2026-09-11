@@ -1,19 +1,23 @@
-# Architecture and review guide
+# Architecture and source review guide
 
-Start with the product video, then follow the profile flow through these files:
+The repository is an npm workspace monorepo. `apps/web` retains Next.js and serves the latest conversation interface at `/`. Its `/workspace`, `/profile`, `/jobs`, `/discover`, `/criteria` and `/intelligence` routes preserve the existing backend workflows.
 
-| Area                 | Entry point                                 | Responsibility                                      |
-| -------------------- | ------------------------------------------- | --------------------------------------------------- |
-| Application          | `src/AppCommandCenter.jsx`                  | Navigation and workspace composition                |
-| Profile conversation | `src/components/ProfileConversation.jsx`    | Conversation, pending proposals and review          |
-| Voice transport      | `src/hooks/useElevenLabsCall.js`            | SDK session lifecycle and client-tool dispatch      |
-| Token boundary       | `server/voice-api.js`                       | Server-side credentials and provider error handling |
-| Proposal validation  | `src/lib/profile-proposals.js`              | Allowed fields and literal candidate evidence       |
-| Confirmation         | `src/hooks/useProfileInterview.js`          | Pending state, edits and explicit persistence       |
-| Fixtures             | `src/data/`, `server/recorded-discovery.js` | Synthetic candidate and opportunity data            |
+## Request flow
 
-The review path does not save a fact merely because the model proposed it. Editing clears that item's confirmation; the user must select it again. Pending and confirmed values are stored separately. A confirmed correction records that its wording came from the candidate.
+- `apps/web/ui`: latest interface, conversation state and candidate confirmation.
+- `apps/web/app/api/voice/token`: server-only ElevenLabs token adapter.
+- `apps/web/app/api/[...path]`: allowlisted same-origin proxy to NestJS; `/career-api` reuses this proxy.
+- `apps/api/src`: domain services for profile, evidence, matching, preparation and discovery.
+- `apps/worker`: queued artifact generation and outbox processing.
+- `packages/data`: PostgreSQL schema and ordered migrations.
+- `packages/domain` and `packages/agents`: shared contracts and policies.
 
-Tests cover evidence rejection, explicit-confirmation boundaries, repeated conversation turns and the token endpoint's failure and disclosure behavior. Provider calls are mocked in automated tests, so CI does not need secrets or consume model usage. The demo provides separate evidence of a real provider call.
+Confirmed conversation facts are saved through `/profile/conversation-facts` after explicit review. Pending proposals are never automatically submitted. The backend includes confirmed conversation values in discovery profile signals without representing them as imported CV material. General chat and the new CV editor are not wired to a live reasoning provider.
 
-A new call opens a new provider session; the interface preserves transcript history locally but does not yet supply cross-call memory to the agent. The recorded-discovery adapter is not a live search service. These boundaries are intentional and visible in the README.
+## Deployment
+
+Compose includes PostgreSQL and Redis health checks, a one-shot migration service, API readiness, web, artifact worker and discovery worker. It uses a separate project name and durable named volumes. Runtime voice credentials are passed only to the web service and excluded from the image build context.
+
+## Current boundaries
+
+The latest opportunity archive and CV editor contain fictional examples. Persisted evidence, matching, preparation and application workflows remain accessible through the backend workspace. Agent routing policies are separately tested; template generation is the default worker path. Browser conversation history is not provider cross-call memory. There is no account or public multi-user security layer.

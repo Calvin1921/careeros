@@ -1,0 +1,28 @@
+{
+  "name": "@careeros/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch --env-file=../../.env src/main.ts",
+    "start": "node dist/main.js",
+    "dev:discovery": "tsx watch --env-file=../../.env src/discovery-worker.ts"
+  },
+  "dependencies": {
+    "@careeros/data": "*",
+    "@careeros/domain": "*",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/platform-express": "^11.1.6",
+    "html-to-text": "^10.0.1",
+    "mammoth": "^1.12.2",
+    "multer": "^2.3.0",
+    "pdf-parse": "^2.4.5",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/html-to-text": "^9.0.4"
+  }
+}

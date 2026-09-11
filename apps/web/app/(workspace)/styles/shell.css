@@ -1,0 +1,212 @@
+.app-rail {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 228px;
+  background: #111d32;
+  color: #fff;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 1.5rem;
+  letter-spacing: -1px;
+  padding: 0 10px;
+  gap: 0;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #4468ec;
+  color: white;
+  font-size: 23px;
+  margin-right: 11px;
+  position: relative;
+}
+.brand-mark > span {
+  position: absolute;
+  right: 2px;
+  top: -5px;
+  font-size: 20px;
+}
+.brand-os {
+  font-weight: 350;
+  color: #9baecb;
+}
+.rail-caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #8e9db6;
+  margin: 36px 13px 15px;
+}
+.app-rail nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.app-rail nav a {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 11px 14px;
+  color: #adbbd1;
+  text-decoration: none;
+  border-radius: 9px;
+  font-size: 0.875rem;
+  font-weight: 550;
+}
+.app-rail nav a[aria-current="page"] {
+  background: #253657;
+  color: white;
+}
+.app-rail nav a[aria-current="page"] svg {
+  color: #9db1ff;
+}
+.rail-bottom {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: auto;
+  padding: 20px 4px 0;
+  border-top: 1px solid #2b3548;
+}
+.rail-bottom strong {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.rail-bottom small {
+  font-size: 0.75rem;
+  color: #92a1b9;
+}
+.workspace-avatar {
+  background: #2a3c59;
+  color: #cfdaef;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+#main-content {
+  margin-left: 228px;
+}
+main {
+  max-width: 1320px;
+  margin: auto;
+  padding: 48px 48px 70px;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+.heading p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.heading .eyebrow {
+  font-size: 0.75rem;
+  margin-bottom: 12px;
+}
+.narrow {
+  max-width: 1320px;
+}
+.back-link + .heading {
+  margin-top: 24px;
+}
+@media (min-width: 1600px) {
+  main {
+    padding-top: 60px;
+  }
+}
+@media (max-width: 1050px) {
+  .app-rail {
+    width: 190px;
+    padding: 28px 14px;
+  }
+  #main-content {
+    margin-left: 190px;
+  }
+  main {
+    padding: 32px 28px;
+  }
+}
+@media (max-width: 760px) {
+  .app-rail {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding: 14px 20px;
+    background: #111d32;
+  }
+  .brand {
+    font-size: 1.25rem;
+    padding: 0;
+  }
+  .brand-mark {
+    width: 27px;
+    height: 27px;
+    font-size: 20px;
+  }
+  .rail-caption,
+  .rail-bottom {
+    display: none;
+  }
+  .app-rail nav {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 14px;
+  }
+  .app-rail nav a {
+    padding: 9px 8px;
+    font-size: 0.875rem;
+    justify-content: center;
+    gap: 6px;
+  }
+  .app-rail nav svg {
+    display: none;
+  }
+  .brand-mark > span {
+    font-size: 16px;
+  }
+  #main-content {
+    margin: 0;
+  }
+  main {
+    padding: 28px 20px 50px;
+  }
+  .heading {
+    gap: 16px;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+  .heading p {
+    font-size: 0.875rem;
+  }
+}
+@media (max-width: 390px) {
+  .app-rail nav svg {
+    display: none;
+  }
+  .app-rail {
+    padding: 12px 14px;
+  }
+}

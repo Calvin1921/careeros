@@ -7,11 +7,15 @@ The included candidate, employers, roles and CVs are fictional. Contact addresse
 | API key and agent ID      | Local `.env`, server process | Ignored by Git; never bundled into the client                    |
 | Call audio and transcript | ElevenLabs                   | Processed by the provider; template requests seven-day retention |
 | Conversation and evidence | Browser localStorage         | Retained on that browser until cleared                           |
-| Confirmed profile         | Separate localStorage record | Written only after explicit confirmation                         |
+| Confirmed profile         | PostgreSQL | Written only after explicit confirmation                         |
 | Opportunity state         | Browser localStorage         | Fictional demo state                                             |
 
-To reset the demo, stop any active call and clear this site's browser storage through developer tools, then reload. This removes local history, pending proposals, confirmed details and application state. It does not delete provider-side recordings; manage those through the provider account.
+To reset the demo, stop any active call and clear this site's browser storage through developer tools, then reload. This removes local history, pending proposals and browser application state. It does not delete provider-side recordings; manage those through the provider account.
 
 The token server binds to the local machine. It is not an authenticated public API. Do not publish a configured development server. Use fictional information when reviewing this prototype.
 
 Repository source is provided for review; no open-source license is granted. Third-party packages retain their respective licenses, available in their installed distributions. Generic commit metadata is used to keep personal email addresses out of this review repository.
+
+## Monorepo persistence
+
+Confirmed conversation facts and their quotes now reside in PostgreSQL. Pending proposals and raw conversation history remain in browser storage. Clearing browser storage does not erase database records. The local API supports an explicitly confirmed empty fact list to clear conversation facts; other profile records require their respective workflow. Docker volumes persist across container restarts. Provider retention and deletion are separate.

@@ -13,3 +13,7 @@ The candidate's spoken input is scripted and synthesized with a stock voice. Age
 The recorded call completed without interrupted spoken turns. Five confirmed facts persisted after reload. The opportunity workflow uses fixtures, not the newly confirmed profile. No employer submission occurs.
 
 Screenshots and recording were reviewed for personal information. The video also received sampled OCR checks; these checks are not a guarantee against every possible disclosure. Small presentation improvements may appear in source after recording.
+
+## Integrated source
+
+The recording predates the Next.js monorepo integration. The latest UI is now served by apps/web in Docker, confirmed conversation facts persist in PostgreSQL, and discovery requests reach the original API. The recording remains a UI walkthrough, not a recording of the Docker verification.

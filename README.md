@@ -1,85 +1,106 @@
 # CareerOS
 
-A career conversation becomes a profile the candidate can inspect and control. CareerOS asks about experience, goals and working preferences, proposes details with supporting quotes, and saves only what the candidate confirms.
+A conversation-first career workspace with a Next.js interface, a service API, background workers and an evidence-backed data model. Candidates review what an agent proposes before confirming profile details.
 
 ### Product walkthrough · 4:03
 
 https://github.com/user-attachments/assets/f825aedc-6b07-4698-95aa-3e5136396f75
 
-[Download the video](docs/demo/walkthrough.mp4) · [Architecture and review guide](docs/ARCHITECTURE.md) · [Demo notes](docs/DEMO.md)
+[Download video](docs/demo/walkthrough.mp4) · [Architecture](docs/ARCHITECTURE.md) · [Data handling](docs/DATA.md)
 
 ## Problem
 
-A CV describes past work but often misses what someone wants next. Turning a conversation into a useful profile can introduce assumptions that the candidate never agreed to.
+A CV describes past work but often misses what someone wants next. Turning a conversation into a career profile can introduce assumptions the candidate never agreed to. Preparing applications also requires evidence, review and reliable background work.
 
 ## Why it matters
 
-Candidates need to correct the wording and decide what gets saved. A career tool should keep the supporting evidence close to each suggestion.
+A useful career tool must keep candidate intent, supporting evidence and explicit confirmation separate. Work should survive page reloads and worker restarts without turning an AI suggestion into a verified claim.
 
 ## Solution
 
-Start a voice conversation without uploading a CV. Review the extracted details beside quotes from the conversation, edit them, confirm individual items and save the profile. The surrounding workspace demonstrates role comparison, CV preparation and application tracking with fictional data.
+Start with a voice conversation, review proposed details beside supporting quotes, correct the wording and confirm individual facts. Confirmed conversation facts are stored in PostgreSQL and inform subsequent discovery scans. The latest interface is the home screen; its **Open evidence, matching and preparation workspace** link opens the retained service-backed workflows.
+
+The opportunity archive and CV editor in the latest interface still use fictional examples and templates. The backend workspace supports persisted roles, evidence review, matching criteria, preparation tasks and history. These are distinct paths; the new editor does not yet replace every backend screen.
 
 ## Architecture
 
-React and Vite serve the interface. Local Node middleware obtains a short-lived ElevenLabs session token using server-side credentials. The React SDK opens a WebRTC conversation. A client tool validates proposed facts against the transcript; separate browser-storage records hold pending and confirmed details.
-
-```mermaid
-flowchart LR
-  Candidate --> Conversation[Voice conversation]
-  Conversation --> Agent[ElevenLabs agent]
-  Agent --> Proposal[Propose profile facts]
-  Proposal --> Evidence[Validate candidate quotes]
-  Evidence --> Review[Review and edit]
-  Review --> Confirm[Explicit confirmation]
-  Confirm --> Profile[Local profile]
+```text
+apps/
+  web/       Next.js: latest conversation UI, existing workflows, same-origin proxy
+  api/       NestJS: profile, jobs, evidence, matching, discovery and preparation
+  worker/    Queue-backed artifact generation and outbox delivery
+packages/
+  domain/    Shared models and rules
+  agents/    Agent contracts and routing policies
+  data/      PostgreSQL access and migrations
 ```
+
+Docker Compose runs PostgreSQL, Redis, migrations, API, artifact worker, discovery worker and web. The web server obtains short-lived ElevenLabs tokens; provider credentials remain server-side. See [architecture and source review guide](docs/ARCHITECTURE.md).
 
 ## AI / agent design
 
-The agent asks one question at a time and invokes `propose_profile_facts` after gathering enough information. Six fields are allowed: target role, experience, skills, location, working style and motivation. Unsupported fields, repeated fields, empty values and quotes absent from a candidate turn are rejected. A successful tool call creates a pending proposal, not a confirmed profile.
+The voice agent asks one question at a time and invokes `propose_profile_facts`. The client checks allowed fields and literal candidate quotes. Proposals remain pending until the candidate explicitly confirms them; only then does the API persist the reviewed facts. Discovery consumes these facts with their conversation provenance.
 
-The voice conversation and extraction are live when configured. Opportunity discovery and fit scores are fixtures, CV preparation uses templates, and the general assistant is disconnected. Confirmed voice-profile facts are not yet connected to matching or CV generation. No multi-agent orchestration or model routing is claimed in this implementation.
+The shared agent package contains routing and budget policies. The default artifact worker uses deterministic templates; it does not execute those policies as a live multi-agent pipeline. The general chat assistant remains disconnected. No employer submission is automated.
 
 ## Key tradeoffs
 
-- Quote matching checks where a suggestion came from; it does not prove that the interpretation is correct. The candidate reviews the meaning.
-- Explicit confirmation adds a step but prevents automatic profile updates.
-- Local storage keeps the prototype easy to inspect, without account synchronization or secure multi-user storage.
-- Fictional fixtures make the surrounding workflow reproducible without requiring live job sources.
+- Evidence quotes establish provenance, not correctness. The candidate reviews the interpretation.
+- PostgreSQL holds confirmed facts; pending proposals and conversation history remain in browser storage.
+- Existing backend screens remain available during the latest interface migration.
+- Fictional opportunity and CV examples make the product walkthrough reproducible without live job sources.
 
 ## Production considerations
 
-The local token endpoint rejects foreign origins and missing action headers, keeps credentials server-side and returns generic errors. A public service still needs authentication, authorization, rate limiting and abuse controls.
+This is a local, single-user application. Ports bind to loopback. API proxy routes are allowlisted and mutations check origin. A public deployment needs authentication, authorization, rate limits, deletion controls and operational monitoring.
 
-ElevenLabs processes voice and transcript. The agent template requests seven-day retention; verify effective provider settings before using real information. Browser storage retains conversation history and pending evidence as well as confirmed facts. See [data handling](docs/DATA.md) for reset instructions and boundaries.
-
-Further work includes consent and deletion controls, account storage, extraction evaluations, cross-call context and connecting confirmed facts to downstream workflows. This repository is a working local prototype, not a deployed recruiting service.
+ElevenLabs processes voice and transcripts when enabled. Confirm retention in the provider console. Source fixtures are fictional; never commit runtime databases, `.env` or personal application material.
 
 ## How to run
 
-Use **Node 22.22 or later**. With nvm, run `nvm install` and `nvm use` in this directory.
+### Docker
+
+Install Docker with Compose, then:
+
+```sh
+cp .env.example .env
+docker compose --profile full up --build -d
+```
+
+Open **http://localhost:3002**. Compose uses its own `careeros-review` project and named database volumes. Migrations run before the API and workers. Override published ports in `.env` if they are already occupied; keep `WEB_ORIGIN` consistent when running outside Compose.
+
+```sh
+docker compose --profile full ps
+docker compose --profile full logs --tail=100 api worker web
+docker compose --profile full down
+```
+
+Stopping containers preserves database volumes. Do not remove volumes containing data you want to keep.
+
+### Local development
+
+Use Node 22.22 or later:
 
 ```sh
 npm ci
-npm test
-npm run build
+cp .env.example .env
+docker compose up -d postgres redis
+npm run db:migrate
 npm run dev
 ```
 
-Open `http://127.0.0.1:3002`. The fictional opportunity workflow works without credentials.
+Open http://localhost:3002. The API and workers load the local `.env` configuration.
 
-To enable voice:
+```sh
+npm test
+npm run typecheck
+npm run build
+```
 
-1. Create a private ElevenLabs agent using `voice-agent-config.json` as a template. Replace the stock-voice placeholder with an available voice and keep authentication enabled.
-2. Configure `propose_profile_facts` as a blocking client tool that waits for its result.
-3. Copy `.env.example` to `.env` and set your API key and agent ID. The key needs conversational-agent access. Never use a `VITE_*` variable for credentials.
-4. Restart `npm run dev`, open **Profile → Open conversation → Start a conversation**, and allow microphone access.
+### Optional voice
 
-The development server loads `.env` into its server process. Calls use the configured provider account. Without configuration, the call reports an error and leaves the profile unchanged. `npm run preview` serves static assets only and does not provide the voice endpoint.
+Create a private ElevenLabs agent from `voice-agent-config.json`, replace its stock-voice placeholder, and configure `propose_profile_facts` as a blocking client tool. Set `ELEVENLABS_API_KEY` and `ELEVENLABS_DEMO_AGENT_ID` in `.env`, then recreate the web container (`docker compose --profile full up -d web`) or restart local development. Calls use that provider account. No credentials are needed for the other local workflows.
 
 ## Demo
 
-The [walkthrough](docs/demo/walkthrough.mp4) shows a fictional candidate speaking through a stock synthetic voice. The agent's replies and proposed facts were generated during the call. Five details were confirmed, including a wording correction, and persisted after reload. The opportunity portion uses a separate fictional baseline profile. No application is submitted.
-
-The repository includes source, tests, synthetic fixtures, sample PDFs and the demo. Credentials, personal datasets, browser sessions, internal planning material and prior repository history are excluded.
+The embedded recording shows the approved conversation UI using a fictional candidate. It predates the monorepo integration: confirmed facts now persist in PostgreSQL rather than only on the recording device, and discovery uses the real API. The opportunity and CV scenes remain fictional demonstrations. See [demo notes](docs/DEMO.md).
